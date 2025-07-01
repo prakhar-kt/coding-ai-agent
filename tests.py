@@ -1,16 +1,15 @@
 # from subdirectory.filename import function_name
 import unittest
-
-from functions.files_info import get_files_info
+    
+from functions.write_file import write_file
 
 class TestGetFilesInfo(unittest.TestCase):
 
     def test_get_files_info(self):
 
-        print(get_files_info("calculator", "."))
-        print(get_files_info("calculator", "pkg"))
-        print(get_files_info("calculator", ":/bin"))
-        print(get_files_info("calculator", "../"))
+        print(write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum"))
+        print(write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amet"))
+        print(write_file("calculator", "/tmp/temp.txt", "this should not be allowed"))
 
 
 if __name__ == '__main__':
