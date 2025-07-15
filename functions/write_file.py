@@ -3,9 +3,8 @@ from google.genai import types
 
 schema_write_file = types.FunctionDeclaration(
     name="write_file",
-    description="Writes the given string into the file \
-                located at the file path \
-                constrained by the working directory",
+    description="Writes content to a file within the working directory. \
+                Creates the file if it doesn't exist.",
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
@@ -21,13 +20,14 @@ schema_write_file = types.FunctionDeclaration(
                     file",
             )
         },
+        required=["file_path", "content"],
     ),
 )
 
 
-def write_file(working_directory, file_path, content):
-    abs_working_dir = os.path.abspath(working_directory)
-    abs_file_path = os.path.abspath(os.path.join(working_directory, file_path))
+def write_file(working_dir, file_path, content):
+    abs_working_dir = os.path.abspath(working_dir)
+    abs_file_path = os.path.abspath(os.path.join(working_dir, file_path))
     if not abs_file_path.startswith(abs_working_dir):
         return f'Error: Cannot write to "{file_path}" as it is outside the permitted working directory'
     if not os.path.exists(abs_file_path):

@@ -3,8 +3,8 @@ from google.genai import types
 
 MAX_CHARS = 10000
 
-schema_get_files_content = types.FunctionDeclaration(
-    name="get_files_content",
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
     description="Returns the content of a file in a file path, \
                 upto a limit if maximum characters, \
                 constrained to the working directory.",
@@ -21,8 +21,8 @@ schema_get_files_content = types.FunctionDeclaration(
     ),
 )
 
-def get_files_content(working_directory, file_path):
-    abs_working_directory = os.path.abspath(working_directory)
+def get_file_content(working_dir, file_path):
+    abs_working_directory = os.path.abspath(working_dir)
     target_path = os.path.abspath(os.path.join(abs_working_directory, file_path))
     if not target_path.startswith(abs_working_directory):
         return f'Error: Cannot read "{file_path}" as it is outside the permitted working directory'

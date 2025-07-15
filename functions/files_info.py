@@ -19,8 +19,8 @@ schema_get_files_info = types.FunctionDeclaration(
     ),
 )
 
-def get_files_info(working_directory, directory=None):
-    abs_working_dir = Path(working_directory).resolve()
+def get_files_info(working_dir, directory=None):
+    abs_working_dir = Path(working_dir).resolve()
     target_dir = abs_working_dir
 
     if directory:
